@@ -201,7 +201,7 @@ export function useMonthlyStats() {
       budgetTotal,
       budgetSpent,
       totalSaved,
-      balance: 8420.55 + allTimeNet - 8420.55 + 12450 + savedThisMonth * 0,
+      balance: 6250 + allTimeNet,
       transactionsThisMonth: inMonth,
     };
   }, [transactions, budgets, goals]);
