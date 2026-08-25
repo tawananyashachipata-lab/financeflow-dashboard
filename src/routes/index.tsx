@@ -8,13 +8,7 @@ import {
   TrendingUp,
   Wallet,
 } from "lucide-react";
-import {
-  Cell,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 import { AddTransactionDialog } from "@/components/finance/AddTransactionDialog";
 import { EmptyState } from "@/components/finance/EmptyState";
@@ -192,9 +186,7 @@ function Dashboard() {
                       style={{ backgroundColor: categoryColors[slice.name] }}
                     />
                     <span className="flex-1 text-muted-foreground">{slice.name}</span>
-                    <span className="font-medium tabular-nums">
-                      {formatMoney(slice.value)}
-                    </span>
+                    <span className="font-medium tabular-nums">{formatMoney(slice.value)}</span>
                   </li>
                 ))}
               </ul>
@@ -241,9 +233,7 @@ function Dashboard() {
                     <span className="font-medium">
                       {goal.emoji} {goal.name}
                     </span>
-                    <span className="text-muted-foreground tabular-nums">
-                      {pct.toFixed(0)}%
-                    </span>
+                    <span className="text-muted-foreground tabular-nums">{pct.toFixed(0)}%</span>
                   </div>
                   <Progress value={pct} className="mt-2 h-2" />
                   <p className="mt-1 text-xs text-muted-foreground">

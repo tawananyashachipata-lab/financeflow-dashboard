@@ -1,15 +1,41 @@
-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
-// or the app will break with duplicate plugins:
-//   - TanStack devtools (dev-only, first), tanstackStart, viteReact, tailwindcss, tsConfigPaths,
-//     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
-//     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
-// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { defineConfig, type ConfigEnv, type PluginOption, type UserConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
-export default defineConfig({
-  tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
-  },
+export default defineConfig(async ({ mode }: ConfigEnv): Promise<UserConfig> => {
+  const plugins: PluginOption[] = [tailwindcss()];
+
+  const { tanstackStart } = await import("@tanstack/react-start/plugin/vite");
+  plugins.push(
+    tanstackStart({
+      server: { entry: "server" },
+      importProtection: {
+        behavior: "error",
+        client: {
+          files: ["**/server/**"],
+          specifiers: ["server-only"],
+        },
+      },
+    }),
+  );
+  plugins.push(react());
+
+  if (mode === "development") {
+    const { devtools } = await import("@tanstack/devtools-vite");
+    plugins.unshift(
+      devtools({
+        logging: false,
+        eventBusConfig: { enabled: false },
+        enhancedLogs: { enabled: false },
+        consolePiping: { enabled: false },
+        removeDevtoolsOnBuild: false,
+        injectSource: { enabled: true },
+      }),
+    );
+  }
+
+  return {
+    resolve: { tsconfigPaths: true },
+    plugins,
+  };
 });

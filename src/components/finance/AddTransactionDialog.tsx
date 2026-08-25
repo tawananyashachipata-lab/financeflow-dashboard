@@ -21,7 +21,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { expenseCategories, incomeCategories, type Category, type TxType } from "@/lib/finance-data";
+import {
+  expenseCategories,
+  incomeCategories,
+  type Category,
+  type TxType,
+} from "@/lib/finance-data";
 import { useFinance } from "@/lib/finance-store";
 import { cn } from "@/lib/utils";
 

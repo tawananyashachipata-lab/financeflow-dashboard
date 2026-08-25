@@ -46,9 +46,7 @@ export function StatCard({
           <span
             className={cn(
               "inline-flex items-center gap-0.5 rounded-full px-2 py-0.5 font-medium",
-              delta >= 0
-                ? "bg-success-soft text-success"
-                : "bg-expense-soft text-expense",
+              delta >= 0 ? "bg-success-soft text-success" : "bg-expense-soft text-expense",
             )}
           >
             <DeltaIcon className="h-3 w-3" aria-hidden="true" />

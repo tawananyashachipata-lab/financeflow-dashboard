@@ -78,7 +78,7 @@ function SidebarBody({ onNavigate }: { onNavigate?: () => void }) {
     <div className="flex h-full flex-col gap-8 bg-sidebar p-5">
       <Brand />
       <div className="flex-1">
-        <NavLinks onNavigate={onNavigate} />
+        <NavLinks {...(onNavigate ? { onNavigate } : {})} />
       </div>
       <div className="flex items-center gap-3 rounded-xl bg-sidebar-accent p-3">
         <span className="flex h-9 w-9 items-center justify-center rounded-full bg-success text-sm font-semibold text-success-foreground">

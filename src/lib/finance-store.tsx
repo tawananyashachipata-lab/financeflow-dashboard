@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 
 import {
   currencies,
@@ -87,9 +80,7 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
 
   const contributeToGoal = useCallback((id: string, amount: number) => {
     setGoals((prev) =>
-      prev.map((g) =>
-        g.id === id ? { ...g, saved: Math.min(g.target, g.saved + amount) } : g,
-      ),
+      prev.map((g) => (g.id === id ? { ...g, saved: Math.min(g.target, g.saved + amount) } : g)),
     );
   }, []);
 
@@ -103,8 +94,7 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
 
   const formatMoney = useCallback(
     (value: number, opts?: { sign?: boolean }) => {
-      const symbol =
-        currencies.find((c) => c.code === settings.currency)?.symbol ?? "$";
+      const symbol = currencies.find((c) => c.code === settings.currency)?.symbol ?? "$";
       const formatted = Math.abs(value).toLocaleString("en-US", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
@@ -166,12 +156,8 @@ export function useMonthlyStats() {
       return dt.getMonth() === now.getMonth() && dt.getFullYear() === now.getFullYear();
     });
 
-    const income = inMonth
-      .filter((t) => t.type === "income")
-      .reduce((s, t) => s + t.amount, 0);
-    const expenses = inMonth
-      .filter((t) => t.type === "expense")
-      .reduce((s, t) => s + t.amount, 0);
+    const income = inMonth.filter((t) => t.type === "income").reduce((s, t) => s + t.amount, 0);
+    const expenses = inMonth.filter((t) => t.type === "expense").reduce((s, t) => s + t.amount, 0);
 
     const spentByCategory = inMonth
       .filter((t) => t.type === "expense")
@@ -181,10 +167,7 @@ export function useMonthlyStats() {
       }, {});
 
     const budgetTotal = budgets.reduce((s, b) => s + b.limit, 0);
-    const budgetSpent = budgets.reduce(
-      (s, b) => s + (spentByCategory[b.category] ?? 0),
-      0,
-    );
+    const budgetSpent = budgets.reduce((s, b) => s + (spentByCategory[b.category] ?? 0), 0);
 
     const totalSaved = goals.reduce((s, g) => s + g.saved, 0);
     const savedThisMonth = income - expenses;

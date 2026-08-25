@@ -98,10 +98,7 @@ function GoalsPage() {
         <p className="mt-1 text-3xl font-semibold text-success tabular-nums">
           {formatMoney(totalSaved)}
         </p>
-        <Progress
-          value={totalTarget ? (totalSaved / totalTarget) * 100 : 0}
-          className="mt-4 h-3"
-        />
+        <Progress value={totalTarget ? (totalSaved / totalTarget) * 100 : 0} className="mt-4 h-3" />
         <p className="mt-2 text-sm text-muted-foreground">
           {formatMoney(Math.max(0, totalTarget - totalSaved))} left to reach{" "}
           {formatMoney(totalTarget)} across {goals.length} goals

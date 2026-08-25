@@ -107,7 +107,9 @@ function BudgetPage() {
           </div>
         </div>
         <Progress value={totalPct} className="mt-4 h-3" />
-        <p className="mt-2 text-sm text-muted-foreground">{totalPct.toFixed(0)}% of your total budget used</p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          {totalPct.toFixed(0)}% of your total budget used
+        </p>
       </div>
 
       {budgets.length === 0 ? (
@@ -166,9 +168,7 @@ function BudgetPage() {
                 <Progress
                   value={pct}
                   className="mt-4 h-2.5"
-                  indicatorClassName={
-                    over ? "bg-expense" : nearing ? "bg-warning" : "bg-success"
-                  }
+                  indicatorClassName={over ? "bg-expense" : nearing ? "bg-warning" : "bg-success"}
                 />
 
                 <div className="mt-3 flex items-center justify-between text-sm">
