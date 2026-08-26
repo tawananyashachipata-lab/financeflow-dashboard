@@ -1,6 +1,7 @@
 import { defineConfig, type ConfigEnv, type PluginOption, type UserConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import { nitro } from "nitro/vite";
 
 export default defineConfig(async ({ mode }: ConfigEnv): Promise<UserConfig> => {
   const plugins: PluginOption[] = [tailwindcss()];
@@ -18,6 +19,7 @@ export default defineConfig(async ({ mode }: ConfigEnv): Promise<UserConfig> => 
       },
     }),
   );
+  plugins.push(nitro({ preset: "vercel" }));
   plugins.push(react());
 
   if (mode === "development") {
